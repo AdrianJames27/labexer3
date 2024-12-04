@@ -18,22 +18,11 @@
     <body>
         <div class="container">
             <div class="text-center mb-4 d-flex justify-content-between">
-                <h1>Welcome, {{ session('name') }}!</h1>
-                <button id="btnLogout" class="btn btn-danger">Logout</button>
-            </div>
-            <div class="col-md-8 post-section mb-5 w-100">
-                <h1 class="mb-4">Add Post</h1>
-                <form id="submitForm">
-                    <div class="mb-3">
-                        <label for="title" class="form-label">Title</label>
-                        <input type="text" class="form-control input-fixed-width" name="title" id="title" placeholder="Enter Title">
-                    </div>
-                    <div class="mb-3">
-                        <label for="content" class="form-label">Content</label>
-                        <textarea class="form-control textarea-fixed-width" name="content" id="content" rows="5" placeholder="Enter Content"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100">Upload Post</button>
-                </form>
+                <h1 class="display-3">Blog Posting</h1>
+                <div class="d-flex justify-content-between">
+                    <a href="{{ route('loginPage') }}" target="_parent" class="btn align-self-center">Login</a>
+                    <a href="{{ route('registerPage') }}" target="_parent" class="btn align-self-center">Register</a>
+                </div>
             </div>
             <hr class="my-4">
             <h1>Post List</h1>
@@ -48,6 +37,6 @@
             crossorigin="anonymous"
         ></script>
         <script src="https://res.cloudinary.com/dy0sbkf3u/raw/upload/Dialog.min.js"></script>
-        <script src="{{ asset('js/blogpost_index.js') }}"></script>
+        <script src="{{ asset('js/blogpost_preview.js') }}"></script>
     </body>
 </html>

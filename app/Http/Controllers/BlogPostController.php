@@ -19,15 +19,9 @@ class BlogPostController extends Controller
     // get all blog posts
     public function getPosts()
     {
-        if (session('logged_in')) {
-            $blogPosts = BlogPost::with('user')->orderBy('created_at', 'desc')->get();
+        $blogPosts = BlogPost::with('user')->orderBy('created_at', 'desc')->get();
 
-            return view('post_list', compact('blogPosts'));
-        } else {
-            return response()->json([
-                'message' => 'Not logged to the system!'
-            ]);
-        }
+        return view('post_list', compact('blogPosts'));
     }
 
     // store the blog post

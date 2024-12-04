@@ -50,6 +50,14 @@ $(document).ready(function() {
         });
     });
 
+    $('#btnLogout').on('click', async () => {
+        const response = await Dialog.showConfirmDialog('Logout?', 'Are you sure you want to logout?');
+
+        if (response === Dialog.YES_OPTION) {
+            window.location.href = '/logout';
+        }
+    });
+
     function updateAllTimesElapsed() {
         setInterval(() => {
             $('.time-elapsed').each(function() {
