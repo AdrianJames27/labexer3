@@ -13,7 +13,7 @@
         >
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     </head>
-    <body>
+    <body class="w-100 h-100 d-flex justify-content-center align-items-center">
         <div class="user-form-container mt-5">
             <h2 class="text-center mb-4">Register</h2>
 

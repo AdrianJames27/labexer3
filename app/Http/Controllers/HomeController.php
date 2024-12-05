@@ -32,9 +32,13 @@ class HomeController extends Controller
         $user = User::where('email', $request->email)->first();
 
         if ($user) {
-            session(['logged_in' => true, 'user_id' => $user->id, 'name' => $user->name]);
+            if ($user->password === $request->password) {
+                session(['logged_in' => true, 'user_id' => $user->id, 'name' => $user->name]);
 
-            return redirect()->route('blogPostIndex');
+                return redirect()->route('blogPostIndex');
+            } else {
+                return redirect()->route('loginPage')->with('error', 'The password is not invalid.');
+            }
         } else {
             return redirect()->route('loginPage')->with('error', 'The user is not registered yet :(');
         }

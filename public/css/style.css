@@ -43,7 +43,6 @@ body {
 
 .user-form-container {
     width: 45vw; /* Set a max width for the form */
-    margin: auto; /* Center the form */
     padding: 20px; /* Add padding */
     background-color: #ffffff; /* White background for the form */
     border-radius: 8px; /* Rounded corners */
