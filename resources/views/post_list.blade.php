@@ -12,3 +12,9 @@
 @empty
     <div class="blog-container" id="emptyPostLabel">No post uploaded yet</div>
 @endforelse
+
+@if ($blogPosts->isNotEmpty())
+    <div class="mt-2">
+        {{ $blogPosts->links() }}
+    </div>
+@endif

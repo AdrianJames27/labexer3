@@ -19,7 +19,7 @@ class BlogPostController extends Controller
     // get all blog posts
     public function getPosts()
     {
-        $blogPosts = BlogPost::with('user')->orderBy('created_at', 'desc')->get();
+        $blogPosts = BlogPost::with('user')->orderBy('created_at', 'desc')->paginate(5);
 
         return view('post_list', compact('blogPosts'));
     }

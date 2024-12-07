@@ -49,6 +49,26 @@ $(document).ready(function() {
         element.text(timeString);
     }
 
+    $(document).on('click', '.pagination a', function(e) {
+        e.preventDefault(); // Prevent the default link behavior
+    
+        const url = $(this).attr('href'); // Get the URL from the link
+    
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: function(response) {
+                $('#postList').html(response); // Update the post list with the new data
+    
+                // Update all time-elapsed elements at once
+                updateAllTimesElapsed();
+            },
+            error: function(xhr, status, error) {
+                Dialog.showMessageDialog('Uh oh! :(', error);
+            }
+        });
+    });
+
     // Display welcome dialog
     Dialog.showPlainDialog(`
         <p><b>Welcome to blog posting!</b></p>

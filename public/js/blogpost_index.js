@@ -19,7 +19,7 @@ $(document).ready(function() {
         e.preventDefault();
 
         const title = sanitizeInput($('#title').val());
-        const content = sanitizeInput($('#content').val());
+        const content = sanitizeInput($('#content').val());     
 
         $.ajax({
             url: '/post/store',
@@ -46,6 +46,26 @@ $(document).ready(function() {
                     Object.values(xhr.responseJSON.errors).map(err => `- ${err[0]}`).join('\n') : error;
 
                 Dialog.showMessageDialog(`Uh oh! :(`, errorMessage);
+            }
+        });
+    });
+
+    $(document).on('click', '.pagination a', function(e) {
+        e.preventDefault(); // Prevent the default link behavior
+    
+        const url = $(this).attr('href'); // Get the URL from the link
+    
+        $.ajax({
+            url: url,
+            type: 'GET',
+            success: function(response) {
+                $('#postList').html(response); // Update the post list with the new data
+    
+                // Update all time-elapsed elements at once
+                updateAllTimesElapsed();
+            },
+            error: function(xhr, status, error) {
+                Dialog.showMessageDialog('Uh oh! :(', error);
             }
         });
     });
