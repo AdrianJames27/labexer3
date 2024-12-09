@@ -1,10 +1,14 @@
 $(document).ready(function() {
-    async function getPosts() {
+    let currentPage = 1;
+
+    async function getPosts(page) {
         $.ajax({
-            url: '/post/get', 
+            url: `/post/get?page=${page}`, 
             type: 'GET',
             success: function(response) {
                 $('#postList').html(response);
+
+                currentPage = page;
 
                 // Update all time-elapsed elements at once
                 updateAllTimesElapsed();
@@ -54,20 +58,10 @@ $(document).ready(function() {
         e.preventDefault(); // Prevent the default link behavior
     
         const url = $(this).attr('href'); // Get the URL from the link
+        const page = new URL(url).searchParams.get('page'); // Extract the page number
+        currentPage = page; // Update the current page
     
-        $.ajax({
-            url: url,
-            type: 'GET',
-            success: function(response) {
-                $('#postList').html(response); // Update the post list with the new data
-    
-                // Update all time-elapsed elements at once
-                updateAllTimesElapsed();
-            },
-            error: function(xhr, status, error) {
-                Dialog.showMessageDialog('Uh oh! :(', error);
-            }
-        });
+        getPosts(page); // Fetch posts for the selected page
     });
 
     $('#btnLogout').on('click', async () => {
@@ -143,11 +137,11 @@ $(document).ready(function() {
     `);
 
     // Get all posts on load
-    getPosts();
+    getPosts(currentPage);
 
     // Auto-refresh posts every 30 seconds
     setInterval(() => {
-        getPosts();
+        getPosts(currentPage);
         console.log('post refresh');
     }, 30000);
 });
